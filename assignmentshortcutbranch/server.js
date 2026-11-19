@@ -8,6 +8,8 @@
 //   ALLOWED_ORIGINS  comma-separated list of sites allowed to call /proxy from a browser
 //                    (default "*", which lets any site use it; set this when you deploy)
 //   RATE_LIMIT       requests per minute per visitor (default 120)
+//   MAX_CONCURRENT   simultaneous upstream requests across all visitors (default 100)
+//   MAX_PER_CLIENT   simultaneous upstream requests per visitor (default 10)
 //   TRUST_PROXY      set to 1 to read the visitor's address from X-Forwarded-For
 //
 // Endpoints
@@ -33,6 +35,8 @@ const PORT = process.env.PORT || 3000;
 const PUBLIC_URL = process.env.PUBLIC_URL;
 const ALLOWED = (process.env.ALLOWED_ORIGINS || "*").split(",").map((s) => s.trim()).filter(Boolean);
 const RATE_LIMIT = Number(process.env.RATE_LIMIT) || 120;
+const MAX_CONCURRENT = Math.max(1, Number(process.env.MAX_CONCURRENT) || 100);
+const MAX_PER_CLIENT = Math.max(1, Number(process.env.MAX_PER_CLIENT) || 10);
 const TRUST_PROXY = process.env.TRUST_PROXY === "1";
 
 const MAX_REDIRECTS = 8;
@@ -56,9 +60,15 @@ const STRIP = new Set(["content-security-policy", "content-security-policy-repor
 
 // ---- Visitors: a simple per-address rate limit ----
 const hits = new Map();
-function limited(req) {
+const activeByClient = new Map();
+let activeRequests = 0;
+
+function clientKey(req) {
   const fwd = TRUST_PROXY ? String(req.headers["x-forwarded-for"] || "").split(",")[0].trim() : "";
-  const who = fwd || req.socket.remoteAddress || "?";
+  return fwd || req.socket.remoteAddress || "?";
+}
+function limited(req) {
+  const who = clientKey(req);
   const now = Date.now();
   let h = hits.get(who);
   if (!h || now > h.reset) { h = { n: 0, reset: now + 60000 }; hits.set(who, h); }
@@ -156,6 +166,17 @@ async function handleProxy(req, res, reqUrl) {
   const mode = reqUrl.searchParams.get("mode");
   const browse = mode === "browse";
 
+  // Bound simultaneous upstream work so bursts cannot exhaust sockets or memory.
+  // Excess requests fail fast instead of building an unbounded queue.
+  const visitor = clientKey(req);
+  const visitorActive = activeByClient.get(visitor) || 0;
+  if (activeRequests >= MAX_CONCURRENT || visitorActive >= MAX_PER_CLIENT) {
+    res.setHeader("Retry-After", "2");
+    return fail(res, 503, "The proxy is busy. Please retry in a moment.");
+  }
+  activeRequests++;
+  activeByClient.set(visitor, visitorActive + 1);
+
   try {
     const headers = { "user-agent": DEFAULT_UA };
     for (const h of ["user-agent", "accept", "accept-language", "content-type", "range"]) {
@@ -225,6 +246,11 @@ async function handleProxy(req, res, reqUrl) {
     const timedOut = e && (e.name === "TimeoutError" || e.name === "AbortError");
     if (!res.headersSent) fail(res, timedOut ? 504 : 502, timedOut ? "The site took too long to answer" : "Proxy error: " + e.message);
     else { try { res.destroy(); } catch (e2) {} }
+  } finally {
+    activeRequests--;
+    const remaining = (activeByClient.get(visitor) || 1) - 1;
+    if (remaining > 0) activeByClient.set(visitor, remaining);
+    else activeByClient.delete(visitor);
   }
 }
 
@@ -234,8 +260,10 @@ const FILES = {
   "/favicon.ico": ["favicon.ico", "image/x-icon"],
 };
 
-http.createServer((req, res) => {
-  const u = new URL(req.url, "http://localhost");
+const server = http.createServer((req, res) => {
+  let u;
+  try { u = new URL(req.url, "http://localhost"); }
+  catch (e) { return fail(res, 400, "Invalid request URL"); }
   if (u.pathname === "/proxy") return handleProxy(req, res, u);
   if (u.pathname === "/health") { res.writeHead(200, { "Content-Type": "text/plain" }); return res.end("ok"); }
   const f = FILES[u.pathname];
@@ -246,4 +274,16 @@ http.createServer((req, res) => {
     return fs.createReadStream(file).pipe(res);
   }
   res.writeHead(404); res.end("Not found");
-}).listen(PORT, () => console.log(`Assignment Shortcuts proxy running at http://localhost:${PORT}`));
+});
+
+// Bound slow headers and incoming requests without interfering with streamed responses.
+server.headersTimeout = 15_000;
+server.requestTimeout = 120_000;
+server.keepAliveTimeout = 5_000;
+server.maxHeadersCount = 100;
+server.maxConnections = Math.max(MAX_CONCURRENT * 2, 200);
+
+server.listen(PORT, () => {
+  console.log(`Assignment Shortcuts proxy running at http://localhost:${PORT}`);
+  console.log(`Concurrency limits: ${MAX_CONCURRENT} total, ${MAX_PER_CLIENT} per visitor`);
+});
