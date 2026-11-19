@@ -4,51 +4,60 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Assignment Shortcuts</title>
-<script>try{if(JSON.parse(localStorage.getItem("notblank.ui"))==="simple")document.documentElement.setAttribute("data-ui","simple")}catch(e){}</script>
-<link rel="icon" href="favicon.ico">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Crect%20width%3D%2248%22%20height%3D%2248%22%20rx%3D%2211%22%20fill%3D%22%231A73E8%22%2F%3E%3Cpath%20d%3D%22M24%2013%207%2021l17%208%2013-6.1V31h3V21z%22%20fill%3D%22%23FFFFFF%22%2F%3E%3Cpath%20d%3D%22M14%2026.5V33c0%202.8%204.5%205%2010%205s10-2.2%2010-5v-6.5l-10%204.7z%22%20fill%3D%22%23FFFFFF%22%2F%3E%3C%2Fsvg%3E">
 <style>
-:root{--bg:#f4f5f7;--fg:#12151b;--accent:#12151b;--accent-fg:#ffffff;--ring:#12151b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1014;--fg:#e7eaf0;--accent:#5eead4;--accent-fg:#0b1210;--ring:#5eead4}}
-:root[data-theme="dark"]{--bg:#0e1014;--fg:#e7eaf0;--accent:#5eead4;--accent-fg:#0b1210;--ring:#5eead4}
-html,body{height:100%;margin:0}
-body{background:radial-gradient(60rem 40rem at 50% 40%,color-mix(in srgb,var(--accent) 12%,var(--bg)),var(--bg));color:var(--fg);display:grid;place-items:center;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
-.hub{width:min(36rem,92vw);display:flex;flex-direction:column;gap:1.75rem;text-align:center;padding:1.5rem 0}
-h1{margin:0;font-size:clamp(1.45rem,4.6vw,2.1rem);line-height:1.25;letter-spacing:-.01em}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.9rem}
-.shortcut{text-decoration:none;display:flex;align-items:center;gap:.9rem;font:600 1.1rem/1.2 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;padding:.9rem 1.1rem;border:1px solid color-mix(in srgb,var(--fg) 16%,transparent);background:color-mix(in srgb,var(--fg) 6%,var(--bg));color:var(--fg);border-radius:16px;cursor:pointer;text-align:left;transition:transform .15s,border-color .15s,box-shadow .15s}
-.shortcut img{flex:none;width:36px;height:36px;box-sizing:border-box;padding:4px;border-radius:10px;background:#fff}
-.shortcut:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 10px 28px color-mix(in srgb,var(--accent) 22%,transparent)}
+*{box-sizing:border-box}
+html{color-scheme:light}
+html,body{margin:0;min-height:100%}
+body{background:#f8f9fa;color:#202124;font-family:Roboto,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;display:flex;flex-direction:column;min-height:100vh}
+.topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:.8rem;height:64px;padding:0 1.25rem;background:#fff;border-bottom:1px solid #dadce0}
+.topbar .logo{width:34px;height:34px;border-radius:8px;flex:none}
+.topbar .title{font-size:1.375rem;font-weight:400;color:#5f6368;letter-spacing:0}
+.topbar .spacer{flex:1}
+.topbar .term{font-size:.85rem;color:#5f6368}
+.avatar{width:34px;height:34px;border-radius:50%;background:#1a73e8;color:#fff;display:grid;place-items:center;font-size:.95rem;font-weight:500;flex:none}
+main{flex:1;width:100%;max-width:64rem;margin:0 auto;padding:2rem 1.25rem 3rem}
+h1{margin:0 0 .3rem;font-size:1.5rem;font-weight:400;line-height:1.3}
+.lead{margin:0 0 1.75rem;color:#5f6368;font-size:.95rem;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(16.5rem,1fr));gap:1rem}
+.shortcut{display:flex;align-items:center;gap:.9rem;padding:.9rem 1rem;text-decoration:none;color:inherit;background:#fff;border:1px solid #dadce0;border-radius:10px;cursor:pointer;text-align:left;transition:box-shadow .15s,border-color .15s,transform .15s}
+.shortcut:hover{border-color:#c6d3e8;box-shadow:0 1px 2px rgba(60,64,67,.3),0 1px 3px 1px rgba(60,64,67,.15);transform:translateY(-1px)}
 .shortcut:active{transform:translateY(0)}
-.shortcut:focus-visible{outline:3px solid var(--ring);outline-offset:3px}
-.uipick{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:color-mix(in srgb,var(--fg) 70%,transparent)}
-.uipick select{font:inherit;padding:.35rem .6rem;border-radius:999px;border:1px solid color-mix(in srgb,var(--fg) 25%,transparent);background:var(--bg);color:var(--fg)}
-.uipick select:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
-:root[data-ui="simple"]{--bg:#f2f2ee;--fg:#16181d;--accent:#16181d;--accent-fg:#f2f2ee;--ring:#16181d}
-:root[data-ui="simple"] body{background:var(--bg);font-family:"Courier New",monospace}
-:root[data-ui="simple"] h1{font-family:"Courier New",monospace;letter-spacing:0}
-:root[data-ui="simple"] .shortcut{font-family:"Courier New",monospace;border:2px solid var(--fg);background:var(--bg);border-radius:0;box-shadow:none}
-:root[data-ui="simple"] .shortcut img{border-radius:0;border:1px solid var(--fg)}
-:root[data-ui="simple"] .shortcut:hover{background:var(--fg);color:var(--bg);transform:none;box-shadow:none}
-:root[data-ui="simple"] .uipick select{font-family:"Courier New",monospace;border:2px solid var(--fg);border-radius:0}
+.shortcut:focus-visible{outline:2px solid #1a73e8;outline-offset:2px}
+.ico{width:42px;height:42px;flex:none;display:grid;place-items:center;background:#f1f3f4;border-radius:10px;overflow:hidden}
+.ico img{width:26px;height:26px;object-fit:contain;display:block}
+.txt{display:flex;flex-direction:column;gap:.15rem;min-width:0;flex:1}
+.txt b{font-size:.95rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.txt small{font-size:.78rem;color:#5f6368;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+footer{border-top:1px solid #dadce0;background:#fff;padding:.9rem 1.25rem;color:#5f6368;font-size:.78rem;text-align:center}
+@media (max-width:520px){.topbar .term{display:none}main{padding:1.25rem 1rem 2.5rem}}
 </style>
 </head>
 <body>
-<main class="hub">
-<h1>Assignment Shortcuts - Quickly Get to Your Assignment Site!</h1>
+<header class="topbar">
+<img class="logo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Crect%20width%3D%2248%22%20height%3D%2248%22%20rx%3D%2211%22%20fill%3D%22%231A73E8%22%2F%3E%3Cpath%20d%3D%22M24%2013%207%2021l17%208%2013-6.1V31h3V21z%22%20fill%3D%22%23FFFFFF%22%2F%3E%3Cpath%20d%3D%22M14%2026.5V33c0%202.8%204.5%205%2010%205s10-2.2%2010-5v-6.5l-10%204.7z%22%20fill%3D%22%23FFFFFF%22%2F%3E%3C%2Fsvg%3E" alt="" width="34" height="34">
+<span class="title">Assignment Shortcuts</span>
+<span class="spacer"></span>
+<span class="term">Student Portal</span>
+<span class="avatar" aria-hidden="true">S</span>
+</header>
+<main>
+<h1>Your assignment sites</h1>
+<p class="lead">Pick the site your class uses. Every shortcut opens in its own tab.</p>
 <div class="grid">
-<a class="shortcut" href="https://www.ixl.com/" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=ixl.com&amp;sz=64" alt="" width="36" height="36"><span>IXL</span></a>
-<a class="shortcut" href="https://www.khanacademy.org/" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=khanacademy.org&amp;sz=64" alt="" width="36" height="36"><span>Khan Academy</span></a>
-<a class="shortcut" href="https://classroom.google.com/" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=classroom.google.com&amp;sz=64" alt="" width="36" height="36"><span>Google Classroom</span></a>
-<a class="shortcut" href="https://www.zearn.org/" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=zearn.org&amp;sz=64" alt="" width="36" height="36"><span>Zearn</span></a>
-<a class="shortcut" href="https://www.blooket.com/" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=blooket.com&amp;sz=64" alt="" width="36" height="36"><span>Blooket</span></a>
-<a class="shortcut" href="https://www.gimkit.com/" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=gimkit.com&amp;sz=64" alt="" width="36" height="36"><span>Gimkit</span></a>
-<a class="shortcut" href="https://kahoot.it/" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=kahoot.it&amp;sz=64" alt="" width="36" height="36"><span>Kahoot</span></a>
-<a class="shortcut" href="https://edpuzzle.com/" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=edpuzzle.com&amp;sz=64" alt="" width="36" height="36"><span>EdPuzzle</span></a>
-<a class="shortcut" href="https://xtramath.org/" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=xtramath.org&amp;sz=64" alt="" width="36" height="36"><span>XtraMath</span></a>
-<a class="shortcut" href="https://www.canva.com/" target="_blank" rel="noopener noreferrer"><img src="https://www.google.com/s2/favicons?domain=canva.com&amp;sz=64" alt="" width="36" height="36"><span>Canva</span></a>
+<a class="shortcut" href="https://www.ixl.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=ixl.com&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>IXL</b><small>www.ixl.com</small></span></a>
+<a class="shortcut" href="https://www.khanacademy.org/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=khanacademy.org&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>Khan Academy</b><small>www.khanacademy.org</small></span></a>
+<a class="shortcut" href="https://classroom.google.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Crect%20x%3D%222%22%20y%3D%224%22%20width%3D%2244%22%20height%3D%2240%22%20rx%3D%224%22%20fill%3D%22%230F9D58%22%2F%3E%3Crect%20x%3D%226.5%22%20y%3D%228%22%20width%3D%2235%22%20height%3D%2232%22%20rx%3D%221.5%22%20fill%3D%22%230B6B3F%22%2F%3E%3Crect%20x%3D%226.5%22%20y%3D%228%22%20width%3D%2235%22%20height%3D%2232%22%20rx%3D%221.5%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%222%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2218.5%22%20r%3D%224.2%22%20fill%3D%22%23FFFFFF%22%2F%3E%3Cpath%20d%3D%22M15.8%2033.5c0-4.6%203.7-8.3%208.2-8.3s8.2%203.7%208.2%208.3z%22%20fill%3D%22%23FFFFFF%22%2F%3E%3C%2Fsvg%3E" alt="" width="26" height="26"></span><span class="txt"><b>Google Classroom</b><small>classroom.google.com</small></span></a>
+<a class="shortcut" href="https://www.zearn.org/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=zearn.org&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>Zearn</b><small>www.zearn.org</small></span></a>
+<a class="shortcut" href="https://www.blooket.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=blooket.com&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>Blooket</b><small>www.blooket.com</small></span></a>
+<a class="shortcut" href="https://www.gimkit.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=gimkit.com&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>Gimkit</b><small>www.gimkit.com</small></span></a>
+<a class="shortcut" href="https://kahoot.it/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=kahoot.it&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>Kahoot</b><small>kahoot.it</small></span></a>
+<a class="shortcut" href="https://edpuzzle.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=edpuzzle.com&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>EdPuzzle</b><small>edpuzzle.com</small></span></a>
+<a class="shortcut" href="https://xtramath.org/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=xtramath.org&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>XtraMath</b><small>xtramath.org</small></span></a>
+<a class="shortcut" href="https://www.canva.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=canva.com&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>Canva</b><small>www.canva.com</small></span></a>
 </div>
 </main>
-<div class="uipick"><label for="ui">Interface</label><select id="ui"><option value="futuristic">Futuristic Like</option><option value="simple">Simplastic Prototype</option></select></div>
+<footer>Assignment Shortcuts &middot; Student Portal</footer>
 <script>
 (function () {
   var TITLE = "About:NotBlank Virtual Machine"; // loading pages and the sites you open
@@ -114,42 +123,25 @@ h1{margin:0;font-size:clamp(1.45rem,4.6vw,2.1rem);line-height:1.25;letter-spacin
     lockTitle(w);
   }
 
-  // ---- Interface styles ---------------------------------------------------
-  // "Futuristic Like" is the current look; "Simplastic Prototype" is the original plain
-  // look. They only change colours, fonts and shapes, never how anything works.
-  var UI_FONT = 'system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif';
-  var THEMES = {
-    futuristic: {
-      name: "Futuristic Like", font: UI_FONT,
-      pageBg: "#0e1014", launcherBg: "radial-gradient(50rem 30rem at 50% 20%,#14312f,#0e1014)",
-      card: "#161a21", cardBorder: "1px solid #2a303b", cardShadow: "0 20px 60px rgba(0,0,0,.5)",
-      r: "20px", rPanel: "16px", rSm: "12px", rIn: "10px", pill: "999px",
-      text: "#e7eaf0", muted: "#9aa3b2", faint: "#6f7888", link: "#5eead4", ring: "#5eead4",
-      inputBg: "#0e1014", inputBorder: "1px solid #2a303b", placeholder: "#5d6675",
-      priBg: "#5eead4", priFg: "#0b1210", priBorder: "0", priHoverBg: "#7ff0de", priHoverFg: "#0b1210",
-      btnBg: "#161a21", btnFg: "#e7eaf0", btnBorder: "1px solid #2a303b", btnShadow: "0 6px 24px rgba(0,0,0,.45)",
-      btnHoverBg: "#222833", btnHoverFg: "#e7eaf0",
-      msgShadow: "0 6px 24px rgba(0,0,0,.45)", panelShadow: "0 14px 48px rgba(0,0,0,.55)",
-      spinBase: "#2a303b", spinTop: "#5eead4", dot: "inline-block", warn: "#fca5a5"
-    },
-    simple: {
-      name: "Simplastic Prototype", font: '"Courier New",monospace',
-      pageBg: "#f2f2ee", launcherBg: "#f2f2ee",
-      card: "#f2f2ee", cardBorder: "2px solid #16181d", cardShadow: "none",
-      r: "0", rPanel: "0", rSm: "0", rIn: "0", pill: "0",
-      text: "#16181d", muted: "#4a4d55", faint: "#6b6e76", link: "#16181d", ring: "#16181d",
-      inputBg: "#ffffff", inputBorder: "2px solid #16181d", placeholder: "#8a8d95",
-      priBg: "#16181d", priFg: "#f2f2ee", priBorder: "2px solid #16181d", priHoverBg: "transparent", priHoverFg: "#16181d",
-      btnBg: "#f2f2ee", btnFg: "#16181d", btnBorder: "2px solid #16181d", btnShadow: "0 2px 6px rgba(0,0,0,.3)",
-      btnHoverBg: "#16181d", btnHoverFg: "#f2f2ee",
-      msgShadow: "0 2px 6px rgba(0,0,0,.3)", panelShadow: "0 2px 10px rgba(0,0,0,.35)",
-      spinBase: "#d4d4cd", spinTop: "#16181d", dot: "none", warn: "#9b1c1c"
-    }
+  // ---- Interface -----------------------------------------------------------
+  // A single, school-portal look (light surfaces, blue accent, card list) shared by every
+  // page this file writes: the hub, the launcher, the loading screen and error pages.
+  var THEME = {
+    name: "School Portal", font: 'Roboto,system-ui,-apple-system,"Segoe UI",Arial,sans-serif',
+    pageBg: "#f8f9fa", launcherBg: "#f1f3f4",
+    card: "#ffffff", cardBorder: "1px solid #dadce0",
+    cardShadow: "0 1px 2px rgba(60,64,67,.3),0 1px 3px 1px rgba(60,64,67,.15)",
+    r: "12px", rPanel: "12px", rSm: "8px", rIn: "8px", pill: "999px",
+    text: "#202124", muted: "#5f6368", faint: "#80868b", link: "#1a73e8", ring: "#1a73e8",
+    inputBg: "#ffffff", inputBorder: "1px solid #dadce0", placeholder: "#9aa0a6",
+    priBg: "#1a73e8", priFg: "#ffffff", priBorder: "1px solid #1a73e8",
+    priHoverBg: "#1765cc", priHoverFg: "#ffffff",
+    btnBg: "#ffffff", btnFg: "#1a73e8", btnBorder: "1px solid #dadce0", btnShadow: "none",
+    btnHoverBg: "#f1f6fe", btnHoverFg: "#1765cc",
+    msgShadow: "0 1px 3px rgba(60,64,67,.3)", panelShadow: "0 8px 26px rgba(60,64,67,.28)",
+    spinBase: "#e8eaed", spinTop: "#1a73e8", dot: "inline-block", warn: "#c5221f"
   };
-  var UI_OPTIONS = '<option value="futuristic">' + THEMES.futuristic.name + '</option>' +
-    '<option value="simple">' + THEMES.simple.name + '</option>';
-  function uiKey() { var k = store("notblank.ui", "futuristic"); return THEMES[k] ? k : "futuristic"; }
-  function theme() { return THEMES[uiKey()]; }
+  function theme() { return THEME; }
 
   function pageCss() {
     var t = theme();
@@ -176,7 +168,7 @@ h1{margin:0;font-size:clamp(1.45rem,4.6vw,2.1rem);line-height:1.25;letter-spacin
       '.card{width:min(30rem,92vw);background:' + t.card + ';border:' + t.cardBorder + ';border-radius:' + t.r + ';padding:1.75rem;box-shadow:' + t.cardShadow + '}' +
       'form{display:flex;flex-direction:column;gap:1rem}' +
       '.brand{display:flex;align-items:center;gap:.6rem}' +
-      '.dot{display:' + t.dot + ';width:12px;height:12px;border-radius:50%;background:' + t.priBg + ';box-shadow:0 0 14px ' + t.priBg + '}' +
+      '.dot{display:' + t.dot + ';width:12px;height:12px;border-radius:50%;background:' + t.priBg + '}' +
       'h1{margin:0;font-size:1.3rem}.sub{margin:-.4rem 0 0;color:' + t.muted + ';font-size:.9rem}' +
       '.lbl{font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:' + t.muted + ';margin-bottom:.35rem;display:block}' +
       'input[type=text],select{width:100%;font:1rem ' + t.font + ';padding:.85rem 1rem;border:' + t.inputBorder + ';background:' + t.inputBg + ';color:' + t.text + ';border-radius:' + t.rSm + '}' +
@@ -262,9 +254,9 @@ h1{margin:0;font-size:clamp(1.45rem,4.6vw,2.1rem);line-height:1.25;letter-spacin
       MAX_FILES = 1200; MAX_BYTES = 300 * 1024 * 1024; MAX_FILE = 80 * 1024 * 1024;
       PAGE_TIMEOUT = 90000; ASSET_TIMEOUT = 45000;
       DIRECT = { name: "Your proxy", frame: true, binary: true,
-        build: function (u) { return PROXY_BASE + "/proxy?url=" + encodeURIComponent(u); },
+        build: function (u) { return PROXY_BASE + "/proxy?url=" + encodeURIComponent(u) + "&sid=" + clientSid(); },
         finalOf: function (res) { return res.headers.get("x-final-url"); },
-        frameUrl: function (u) { return PROXY_BASE + "/proxy?mode=browse&url=" + encodeURIComponent(u); } };
+        frameUrl: function (u) { return PROXY_BASE + "/proxy?mode=browse&url=" + encodeURIComponent(u) + "&sid=" + clientSid(); } };
     } else {
       // No proxy: the browser fetches and embeds files itself, which only works for sites
       // that allow cross-origin reads, but raising the ceiling still helps large pages on
@@ -276,6 +268,20 @@ h1{margin:0;font-size:clamp(1.45rem,4.6vw,2.1rem);line-height:1.25;letter-spacin
   }
   function ident(t) { return t; }
 
+  // A steady id for this browser, so the proxy can keep a site's login cookies between
+  // page loads. It rides along as ?sid= on proxy calls, which also works when the browser
+  // blocks third-party cookies.
+  function clientSid() {
+    var s = "";
+    try { s = localStorage.getItem("notblank.sid") || ""; } catch (e) { s = ""; }
+    if (!s) {
+      s = (window.crypto && crypto.randomUUID)
+        ? crypto.randomUUID()
+        : "s" + Date.now().toString(36) + Math.random().toString(36).slice(2);
+      try { localStorage.setItem("notblank.sid", s); } catch (e) {}
+    }
+    return encodeURIComponent(s);
+  }
   function store(key, fallback) {
     try { var v = window.localStorage.getItem(key); return v ? JSON.parse(v) : fallback; } catch (e) { return fallback; }
   }
@@ -364,7 +370,7 @@ h1{margin:0;font-size:clamp(1.45rem,4.6vw,2.1rem);line-height:1.25;letter-spacin
   // request is repeated, alternating between the www and non-www form, with a pause that
   // grows to 30 seconds, until it works or the user presses Stop. Error pages that still
   // contain real HTML are shown rather than counted as a failure.
-  async function fetchPage(list, url, status, fails, cancelled, wait, force) {
+  async function fetchPage(list, url, status, fails, cancelled, wait, force, req) {
     var round = 0, delay = 1500;
     while (!cancelled()) {
       round++;
@@ -375,7 +381,13 @@ h1{margin:0;font-size:clamp(1.45rem,4.6vw,2.1rem);line-height:1.25;letter-spacin
           if (cancelled()) return null;
           status(round === 1 && !v ? "Loading " + url + " ..." : "Attempt " + round + ": trying " + tries[v] + " ...");
           try {
-            var res = await timedFetch(p.build(tries[v]), Object.assign({}, p.opts || {}, round > 1 ? { cache: "no-store" } : {}), force ? 10000 : PAGE_TIMEOUT);
+            var opts = Object.assign({}, p.opts || {}, round > 1 ? { cache: "no-store" } : {});
+            if (req && req.method && req.method !== "GET") {
+              opts.method = req.method;
+              opts.body = req.body;
+              opts.headers = req.headers || undefined;
+            }
+            var res = await timedFetch(p.build(tries[v]), opts, force ? 10000 : PAGE_TIMEOUT);
             var html = (p.parse || ident)(await res.text());
             var ct = res.headers.get("content-type") || "";
             if (force) {
@@ -498,8 +510,8 @@ h1{margin:0;font-size:clamp(1.45rem,4.6vw,2.1rem);line-height:1.25;letter-spacin
   }
 
   // Download every file the page uses and rebuild it as one self-contained document.
-  async function extractPage(url, list, status, fails, cancelled, wait, force) {
-    var page = await fetchPage(list, url, status, fails, cancelled, wait, force);
+  async function extractPage(url, list, status, fails, cancelled, wait, force, req) {
+    var page = await fetchPage(list, url, status, fails, cancelled, wait, force, req);
     if (!page) return null;
     var doc = new DOMParser().parseFromString(page.html, "text/html");
     var baseEl = doc.querySelector("base[href]");
@@ -687,8 +699,8 @@ h1{margin:0;font-size:clamp(1.45rem,4.6vw,2.1rem);line-height:1.25;letter-spacin
   // Instead of downloading and embedding every image and font, their addresses are
   // pointed at the proxy and the browser loads them itself, as many as it needs. ES
   // modules are loaded through the proxy too, which rewrites their imports.
-  function proxUrl(u) { return PROXY_BASE + "/proxy?url=" + encodeURIComponent(u); }
-  function proxModule(u) { return PROXY_BASE + "/proxy?mode=module&url=" + encodeURIComponent(u); }
+  function proxUrl(u) { return PROXY_BASE + "/proxy?url=" + encodeURIComponent(u) + "&sid=" + clientSid(); }
+  function proxModule(u) { return PROXY_BASE + "/proxy?mode=module&url=" + encodeURIComponent(u) + "&sid=" + clientSid(); }
   function rewriteSrcset(v, abs) {
     return v.split(/,\s+/).map(function (part) {
       var bits = part.trim().split(/\s+/);
@@ -710,14 +722,14 @@ h1{margin:0;font-size:clamp(1.45rem,4.6vw,2.1rem);line-height:1.25;letter-spacin
   // Makes the page's own fetch/XHR calls go through the proxy, so data the site loads
   // after it starts (APIs, JSON, lazy content) is not blocked.
   function proxyShimCode(base) {
-    return '(function(){try{var P=' + JSON.stringify(PROXY_BASE) + ',B=' + JSON.stringify(base) + ';' +
-      'function w(u){try{var a=new URL(u,B);if(!/^https?:$/.test(a.protocol)||a.href.indexOf(P+"/")===0)return u;return P+"/proxy?url="+encodeURIComponent(a.href)}catch(e){return u}}' +
+    return '(function(){try{var P=' + JSON.stringify(PROXY_BASE) + ',B=' + JSON.stringify(base) + ',S=' + JSON.stringify(clientSid()) + ';' +
+      'function w(u){try{var a=new URL(u,B);if(!/^https?:$/.test(a.protocol)||a.href.indexOf(P+"/")===0)return u;return P+"/proxy?url="+encodeURIComponent(a.href)+"&sid="+S}catch(e){return u}}' +
       'var f=window.fetch;window.fetch=function(i,o){try{o=Object.assign({},o,{credentials:"omit"});' +
       'if(typeof i==="string"||i instanceof URL)return f.call(this,w(String(i)),o);' +
       'if(i&&i.url)return f.call(this,new Request(w(i.url),i),o)}catch(e){}return f.apply(this,arguments)};' +
       'var x=XMLHttpRequest.prototype.open;XMLHttpRequest.prototype.open=function(m,u){arguments[1]=w(String(u));try{this.withCredentials=false}catch(e){}return x.apply(this,arguments)};' +
       'if(navigator.sendBeacon){var b=navigator.sendBeacon.bind(navigator);navigator.sendBeacon=function(u,d){return b(w(String(u)),d)}}' +
-      'function ws(u){try{var a=new URL(u,B);if(!/^https?:$/.test(a.protocol)||a.href.indexOf(P+"/")===0)return u;return P+"/proxy?mode=module&url="+encodeURIComponent(a.href)}catch(e){return u}}' +
+      'function ws(u){try{var a=new URL(u,B);if(!/^https?:$/.test(a.protocol)||a.href.indexOf(P+"/")===0)return u;return P+"/proxy?mode=module&url="+encodeURIComponent(a.href)+"&sid="+S}catch(e){return u}}' +
       'if(typeof HTMLScriptElement!=="undefined"){var sd=Object.getOwnPropertyDescriptor(HTMLScriptElement.prototype,"src");' +
       'if(sd&&sd.set)Object.defineProperty(HTMLScriptElement.prototype,"src",{get:sd.get,set:function(v){sd.set.call(this,ws(String(v)))},configurable:true});' +
       'var sa=Element.prototype.setAttribute;Element.prototype.setAttribute=function(n,v){if(this instanceof HTMLScriptElement&&String(n).toLowerCase()==="src")v=ws(String(v));return sa.call(this,n,v)}}' +
@@ -851,12 +863,14 @@ h1{margin:0;font-size:clamp(1.45rem,4.6vw,2.1rem);line-height:1.25;letter-spacin
     lockTitle(w);
   }
 
+  // Google Classroom's chalkboard icon, drawn inline so it always renders.
+  var CLASSROOM_ICON = "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Crect%20x%3D%222%22%20y%3D%224%22%20width%3D%2244%22%20height%3D%2240%22%20rx%3D%224%22%20fill%3D%22%230F9D58%22%2F%3E%3Crect%20x%3D%226.5%22%20y%3D%228%22%20width%3D%2235%22%20height%3D%2232%22%20rx%3D%221.5%22%20fill%3D%22%230B6B3F%22%2F%3E%3Crect%20x%3D%226.5%22%20y%3D%228%22%20width%3D%2235%22%20height%3D%2232%22%20rx%3D%221.5%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%222%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2218.5%22%20r%3D%224.2%22%20fill%3D%22%23FFFFFF%22%2F%3E%3Cpath%20d%3D%22M15.8%2033.5c0-4.6%203.7-8.3%208.2-8.3s8.2%203.7%208.2%208.3z%22%20fill%3D%22%23FFFFFF%22%2F%3E%3C%2Fsvg%3E";
   // Tab titles and icons for the quick-pick buttons in the admin panel.
   var PRESETS = [
     { name: "Edpuzzle", title: "Edpuzzle", domain: "edpuzzle.com" },
     { name: "IXL", title: "IXL | Math, Language Arts, Science, Social Studies, and Spanish", domain: "ixl.com" },
     { name: "Google Classroom", title: "Home - Classroom", domain: "classroom.google.com",
-      icon: "https://www.google.com/s2/favicons?domain_url=" + encodeURIComponent("https://classroom.google.com/h/st") + "&sz=64" },
+      icon: CLASSROOM_ICON },
     { name: "Khan Academy", title: "Khan Academy", domain: "khanacademy.org" },
     { name: "Zearn", title: "Zearn", domain: "zearn.org" },
     { name: "XtraMath", title: "XtraMath", domain: "xtramath.org" }
@@ -922,7 +936,6 @@ h1{margin:0;font-size:clamp(1.45rem,4.6vw,2.1rem);line-height:1.25;letter-spacin
         '<div class="sec"><span class="lbl">Tab icon (image address)</span><input id="fav" type="text" spellcheck="false" placeholder="https://example.com/icon.png" autocomplete="off" aria-label="Tab icon address"></div>' +
         '<div class="sec"><span class="lbl">Quick picks</span><div class="row" id="presets"></div></div>' +
         '<div class="row"><button id="apply" class="pri" type="button">Apply</button><button id="reset" type="button">Reset</button></div>' +
-        '<div class="sec"><span class="lbl">Interface style</span><select id="uis" aria-label="Interface style">' + UI_OPTIONS + '</select></div>' +
         '</div>' +
         '<div class="liveprompt" hidden><p class="lp-msg"></p><div class="lp-row">' +
         '<label class="lp-remember"><input type="checkbox" id="lpRemember"> Remember for this site</label>' +
@@ -936,14 +949,6 @@ h1{margin:0;font-size:clamp(1.45rem,4.6vw,2.1rem);line-height:1.25;letter-spacin
       root.innerHTML = css + html;
       var $ = function (sel) { return root.querySelector(sel); };
       var panel = $(".panel");
-      $("#uis").value = uiKey();
-      $("#uis").addEventListener("change", function () {
-        save("notblank.ui", $("#uis").value);
-        ctx.panelOpen = true;
-        try { ctx.host.remove(); } catch (e) {}
-        ctx.host = null;
-        ensure();                       // rebuild the controls in the chosen style
-      });
       ctx.msgEl = $(".msg");
       ctx.msgEl.textContent = ctx.lastMsg;
       panel.hidden = !ctx.panelOpen;
@@ -1095,7 +1100,8 @@ h1{margin:0;font-size:clamp(1.45rem,4.6vw,2.1rem);line-height:1.25;letter-spacin
         c2.title = ctx.title;
         c2.favicon = ctx.favicon;
         c2.redirects = ctx.redirects;
-        openSite(w2, u, ctx.list, ctx.mode, null, { auto: nav.auto });
+        openSite(w2, u, ctx.list, ctx.mode, null,
+          { auto: nav.auto, method: nav.method, body: nav.body, headers: nav.headers });
       };
       // Our own back/forward/reload, since the tab's real history is just "about:blank".
       ctx.step = function (n) {
@@ -1124,15 +1130,28 @@ h1{margin:0;font-size:clamp(1.45rem,4.6vw,2.1rem);line-height:1.25;letter-spacin
       ctx.onSubmit = function (e) {
         if (e.defaultPrevented) return;
         var form = e.target;
-        if ((form.getAttribute("method") || "").toLowerCase() === "dialog") return;
+        var method = (form.getAttribute("method") || "get").toLowerCase();
+        if (method === "dialog") return;
         e.preventDefault();
         var u;
         try { u = new URL(form.getAttribute("action") || "", w.document.baseURI); } catch (err) { return; }
-        var params = new URLSearchParams();
-        new w.FormData(form).forEach(function (v, k) { if (typeof v === "string") params.append(k, v); });
-        if (e.submitter && e.submitter.name) params.append(e.submitter.name, e.submitter.value);
-        u.search = params.toString();   // forms are sent as GET requests
-        ctx.go(u.href);
+        var data = new w.FormData(form);
+        if (e.submitter && e.submitter.name) data.append(e.submitter.name, e.submitter.value);
+        if (method !== "post") {
+          var params = new URLSearchParams();
+          data.forEach(function (v, k) { if (typeof v === "string") params.append(k, v); });
+          u.search = params.toString();
+          ctx.go(u.href);
+          return;
+        }
+        // A POST form (how sign-in pages normally work): the fields go as the request
+        // body, so the proxy can hand the username and password to the site unchanged.
+        var enc = (form.getAttribute("enctype") || "").toLowerCase();
+        if (enc === "multipart/form-data") { ctx.go(u.href, { method: "POST", body: data }); return; }
+        var body = new URLSearchParams();
+        data.forEach(function (v, k) { if (typeof v === "string") body.append(k, v); });
+        ctx.go(u.href, { method: "POST", body: body.toString(),
+          headers: { "content-type": "application/x-www-form-urlencoded" } });
       };
       // Script redirects (location.href = ..., location.replace(...), reloads).
       ctx.onNav = function (e) {
@@ -1433,7 +1452,8 @@ h1{margin:0;font-size:clamp(1.45rem,4.6vw,2.1rem);line-height:1.25;letter-spacin
     };
     try {
       if (mode === "frame") { showInFrame(""); return; }
-      var r = await extractPage(url, list, status, fails, cancelled, wait, force);
+      var req = nav.method && nav.method !== "GET" ? { method: nav.method, body: nav.body, headers: nav.headers } : null;
+      var r = await extractPage(url, list, status, fails, cancelled, wait, force, req);
       if (token === ctx.token) ctx.showRetry(false);
       if (token !== ctx.token) return;
       if (r) { done(r.html, r.base, r.refresh); return; }   // null otherwise only when stopped
@@ -1459,7 +1479,6 @@ h1{margin:0;font-size:clamp(1.45rem,4.6vw,2.1rem);line-height:1.25;letter-spacin
       '<p class="foot" style="margin-top:.4rem">A proxy you run (see worker.js or server.js) lets sites that block direct access load, including large ones. Leave it empty to load sites directly.</p></div>' +
       '<div><label class="lbl">Loading Mode</label><div class="modes" role="radiogroup" aria-label="Loading Mode">' + loadModeRadios(loadKey()) + '</div></div>' +
       '<button class="primary" type="submit">Open in new about:blank tab</button><div id="s" role="status"></div>' +
-      '<div><label class="lbl" for="ui">Interface style</label><select id="ui">' + UI_OPTIONS + '</select></div>' +
       '<p class="foot">Links, forms and redirects open in another about:blank tab, so allow popups. If a site refuses, it keeps trying until it loads. Use Stop in the corner to give up. Every tab has its own Reload and Admin buttons.</p></form>' +
       '</main></body></html>');
 
@@ -1469,15 +1488,6 @@ h1{margin:0;font-size:clamp(1.45rem,4.6vw,2.1rem);line-height:1.25;letter-spacin
     var $ = function (id) { return d.getElementById(id); };
     var status = function (t) { $("s").textContent = t; };
 
-    $("ui").value = uiKey();
-    $("ui").addEventListener("change", function () {
-      save("notblank.ui", $("ui").value);
-      var keep = $("u").value;
-      buildLauncher(w);                 // redraw this page in the chosen style
-      var again = w.document.getElementById("u");
-      again.value = keep;
-      again.focus();
-    });
     $("px").value = store("notblank.proxy", DEFAULT_PROXY);
     $("u").focus();
 
@@ -1526,18 +1536,6 @@ h1{margin:0;font-size:clamp(1.45rem,4.6vw,2.1rem);line-height:1.25;letter-spacin
     swapped = !swapped;
   });
 
-  // Interface style switch (look only; nothing else changes).
-  var uiSel = document.getElementById("ui");
-  function applyMainUi(k) {
-    if (k === "simple") document.documentElement.setAttribute("data-ui", "simple");
-    else document.documentElement.removeAttribute("data-ui");
-  }
-  uiSel.value = uiKey();
-  applyMainUi(uiKey());
-  uiSel.addEventListener("change", function () {
-    save("notblank.ui", uiSel.value);
-    applyMainUi(uiSel.value);
-  });
 })();
 </script>
 </body>
