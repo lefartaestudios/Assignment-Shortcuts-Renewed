@@ -8,44 +8,65 @@
 *{box-sizing:border-box}
 html{color-scheme:light}
 html,body{margin:0;min-height:100%}
-body{background:#f8f9fa;color:#202124;font-family:Roboto,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;display:flex;flex-direction:column;min-height:100vh}
-.topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:.8rem;height:64px;padding:0 1.25rem;background:#fff;border-bottom:1px solid #dadce0}
-.topbar .logo{width:34px;height:34px;border-radius:8px;flex:none}
-.topbar .title{font-size:1.375rem;font-weight:400;color:#5f6368;letter-spacing:0}
+body{background:#f5f6fb;color:#25263a;font-family:Roboto,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;display:flex;flex-direction:column;min-height:100vh}
+.topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:.85rem;height:68px;padding:0 1.6rem;background:#fff;border-bottom:1px solid #e6e7ef}
+.topbar .logo{width:35px;height:35px;border-radius:10px;flex:none}
+.topbar .title{font-size:1.22rem;font-weight:650;color:#282943;letter-spacing:-.02em}
 .topbar .spacer{flex:1}
-.topbar .term{font-size:.85rem;color:#5f6368}
-.avatar{width:34px;height:34px;border-radius:50%;background:#1a73e8;color:#fff;display:grid;place-items:center;font-size:.95rem;font-weight:500;flex:none}
-main{flex:1;width:100%;max-width:64rem;margin:0 auto;padding:2rem 1.25rem 3rem}
-h1{margin:0 0 .3rem;font-size:1.5rem;font-weight:400;line-height:1.3}
-.lead{margin:0 0 1.75rem;color:#5f6368;font-size:.95rem;line-height:1.5}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(16.5rem,1fr));gap:1rem}
-.shortcut{display:flex;align-items:center;gap:.9rem;padding:.9rem 1rem;text-decoration:none;color:inherit;background:#fff;border:1px solid #dadce0;border-radius:10px;cursor:pointer;text-align:left;transition:box-shadow .15s,border-color .15s,transform .15s}
-.shortcut:hover{border-color:#c6d3e8;box-shadow:0 1px 2px rgba(60,64,67,.3),0 1px 3px 1px rgba(60,64,67,.15);transform:translateY(-1px)}
+.topbar .term{font-size:.84rem;color:#777990}
+.avatar{width:36px;height:36px;border-radius:50%;background:#6256c8;color:#fff;display:grid;place-items:center;font-size:.95rem;font-weight:650;flex:none}
+.workspace{display:grid;grid-template-columns:224px minmax(0,1fr);flex:1;width:100%;max-width:1440px;margin:0 auto}
+.sidebar{padding:1.6rem 1rem;background:#fff;border-right:1px solid #e6e7ef}
+.side-label{margin:.2rem .75rem .75rem;color:#9697aa;font-size:.68rem;font-weight:750;letter-spacing:.1em;text-transform:uppercase}
+.side-link{display:flex;align-items:center;gap:.75rem;padding:.78rem .85rem;margin:.2rem 0;border-radius:10px;color:#666980;text-decoration:none;font-size:.9rem;font-weight:550}
+.side-link:hover{background:#f2f1fc;color:#5145b5}
+.side-link.active{background:#efedff;color:#5145b5}
+.side-symbol{width:22px;text-align:center;font-size:1.05rem}
+main{min-width:0;width:100%;max-width:1100px;margin:0 auto;padding:2.15rem 2.25rem 3rem}
+.welcome{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:1.8rem}
+h1{margin:0 0 .35rem;font-size:1.8rem;font-weight:700;letter-spacing:-.045em;line-height:1.2;color:#292a43}
+.lead{margin:0;color:#777990;font-size:.94rem;line-height:1.5}
+.welcome-tag{padding:.55rem .8rem;background:#fff;border:1px solid #e6e7ef;border-radius:999px;color:#656780;font-size:.78rem;white-space:nowrap}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin:1.8rem 0 .85rem}
+.section-head h2{margin:0;color:#30314a;font-size:1.08rem;font-weight:700;letter-spacing:-.02em}
+.section-head span{color:#9293a6;font-size:.8rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:.85rem}
+.shortcut{display:flex;align-items:center;gap:.85rem;min-height:82px;padding:.9rem 1rem;text-decoration:none;color:inherit;background:#fff;border:1px solid #e5e6ef;border-radius:13px;cursor:pointer;text-align:left;transition:box-shadow .16s,border-color .16s,transform .16s}
+.shortcut:hover{border-color:#c9c4f4;box-shadow:0 7px 20px rgba(54,48,115,.08);transform:translateY(-2px)}
 .shortcut:active{transform:translateY(0)}
-.shortcut:focus-visible{outline:2px solid #1a73e8;outline-offset:2px}
-.ico{width:42px;height:42px;flex:none;display:grid;place-items:center;background:#f1f3f4;border-radius:10px;overflow:hidden}
-.ico img{width:26px;height:26px;object-fit:contain;display:block}
-.txt{display:flex;flex-direction:column;gap:.15rem;min-width:0;flex:1}
-.txt b{font-size:.95rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.txt small{font-size:.78rem;color:#5f6368;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-footer{border-top:1px solid #dadce0;background:#fff;padding:.9rem 1.25rem;color:#5f6368;font-size:.78rem;text-align:center}
-@media (max-width:520px){.topbar .term{display:none}main{padding:1.25rem 1rem 2.5rem}}
+.shortcut:focus-visible{outline:2px solid #665bd1;outline-offset:2px}
+.ico{width:44px;height:44px;flex:none;display:grid;place-items:center;background:#f4f4fa;border-radius:12px;overflow:hidden}
+.ico img{width:27px;height:27px;object-fit:contain;display:block}
+.txt{display:flex;flex-direction:column;gap:.2rem;min-width:0;flex:1}
+.txt b{font-size:.91rem;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#33344c}
+.txt small{font-size:.74rem;color:#898a9d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+footer{border-top:1px solid #e6e7ef;background:#fff;padding:.9rem 1.25rem;color:#898a9d;font-size:.78rem;text-align:center}
+@media (max-width:820px){.workspace{grid-template-columns:1fr}.sidebar{display:flex;gap:.35rem;overflow-x:auto;padding:.65rem .85rem;border-right:0;border-bottom:1px solid #e6e7ef}.side-label{display:none}.side-link{white-space:nowrap;margin:0;padding:.65rem .8rem}.welcome{align-items:flex-start;flex-direction:column}main{padding:1.6rem 1.2rem 2.5rem}}
+@media (max-width:520px){.topbar{height:60px;padding:0 1rem}.topbar .term{display:none}h1{font-size:1.55rem}.grid{grid-template-columns:1fr}.welcome-tag{white-space:normal}}
 </style>
 </head>
 <body>
 <header class="topbar">
-<img class="logo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Crect%20width%3D%2248%22%20height%3D%2248%22%20rx%3D%2211%22%20fill%3D%22%231A73E8%22%2F%3E%3Cpath%20d%3D%22M24%2013%207%2021l17%208%2013-6.1V31h3V21z%22%20fill%3D%22%23FFFFFF%22%2F%3E%3Cpath%20d%3D%22M14%2026.5V33c0%202.8%204.5%205%2010%205s10-2.2%2010-5v-6.5l-10%204.7z%22%20fill%3D%22%23FFFFFF%22%2F%3E%3C%2Fsvg%3E" alt="" width="34" height="34">
+<img class="logo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Crect%20width%3D%2248%22%20height%3D%2248%22%20rx%3D%2211%22%20fill%3D%22%236258C9%22%2F%3E%3Cpath%20d%3D%22M24%2013%207%2021l17%208%2013-6.1V31h3V21z%22%20fill%3D%22%23FFFFFF%22%2F%3E%3Cpath%20d%3D%22M14%2026.5V33c0%202.8%204.5%205%2010%205s10-2.2%2010-5v-6.5l-10%204.7z%22%20fill%3D%22%23FFFFFF%22%2F%3E%3C%2Fsvg%3E" alt="" width="35" height="35">
 <span class="title">Assignment Shortcuts</span>
 <span class="spacer"></span>
-<span class="term">Student Portal</span>
+<span class="term">Learning Hub</span>
 <span class="avatar" aria-hidden="true">S</span>
 </header>
-<main>
-<h1>Your assignment sites</h1>
-<p class="lead">Pick the site your class uses. Every shortcut opens in its own tab.</p>
+<div class="workspace">
+<aside class="sidebar" aria-label="Main navigation">
+<div class="side-label">Workspace</div>
+<a class="side-link active" href="#dashboard"><span class="side-symbol">⌂</span>Dashboard</a>
+<a class="side-link" href="#apps"><span class="side-symbol">▦</span>All apps</a>
+<a class="side-link" href="#study-tools"><span class="side-symbol">✦</span>Study tools</a>
+</aside>
+<main id="dashboard">
+<div class="welcome"><div><h1>Welcome back!</h1><p class="lead">Jump back into your classes and learning tools.</p></div><span class="welcome-tag">Your learning space</span></div>
+<section id="apps" aria-labelledby="apps-title">
+<div class="section-head"><h2 id="apps-title">Your apps</h2><span>20 shortcuts</span></div>
 <div class="grid">
-<a class="shortcut" href="https://www.ixl.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=ixl.com&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>IXL</b><small>www.ixl.com</small></span></a>
-<a class="shortcut" href="https://www.khanacademy.org/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=khanacademy.org&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>Khan Academy</b><small>www.khanacademy.org</small></span></a>
+<a class="shortcut" href="https://www.ixl.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=ixl.com&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>IXL</b><small>ixl.com</small></span></a>
+<a class="shortcut" href="https://www.khanacademy.org/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=khanacademy.org&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>Khan Academy</b><small>khanacademy.org</small></span></a>
 <a class="shortcut" href="https://classroom.google.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://th.bing.com/th/id/ODF.clCBNhLM1Dz6um2Q2mQpUQ?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2" alt="" width="26" height="26"></span><span class="txt"><b>Google Classroom</b><small>classroom.google.com</small></span></a>
 <a class="shortcut" href="https://www.zearn.org/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=zearn.org&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>Zearn</b><small>www.zearn.org</small></span></a>
 <a class="shortcut" href="https://www.blooket.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=blooket.com&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>Blooket</b><small>www.blooket.com</small></span></a>
@@ -54,9 +75,25 @@ footer{border-top:1px solid #dadce0;background:#fff;padding:.9rem 1.25rem;color:
 <a class="shortcut" href="https://edpuzzle.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=edpuzzle.com&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>EdPuzzle</b><small>edpuzzle.com</small></span></a>
 <a class="shortcut" href="https://xtramath.org/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=xtramath.org&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>XtraMath</b><small>xtramath.org</small></span></a>
 <a class="shortcut" href="https://www.canva.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=canva.com&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>Canva</b><small>www.canva.com</small></span></a>
+<a class="shortcut" href="https://my.mheducation.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=mheducation.com&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>McGraw Hill</b><small>my.mheducation.com</small></span></a>
+<a class="shortcut" href="https://www.icevonline.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=icevonline.com&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>iCEV</b><small>www.icevonline.com</small></span></a>
+<a class="shortcut" href="https://www.eduphoria.net/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=eduphoria.net&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>Eduphoria!</b><small>www.eduphoria.net</small></span></a>
+<a class="shortcut" href="https://www.writable.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=writable.com&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>Writable</b><small>www.writable.com</small></span></a>
+<a class="shortcut" href="https://wayground.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=wayground.com&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>Wayground</b><small>wayground.com</small></span></a>
+<a class="shortcut" href="https://code.org/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=code.org&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>Code.org</b><small>code.org</small></span></a>
+<a class="shortcut" href="https://slides.google.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=slides.google.com&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>Google Slides</b><small>slides.google.com</small></span></a>
+<a class="shortcut" href="https://www.duolingo.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=duolingo.com&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>Duolingo</b><small>www.duolingo.com</small></span></a>
+<a class="shortcut" href="https://www.studiesweekly.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=studiesweekly.com&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>Studies Weekly</b><small>www.studiesweekly.com</small></span></a>
+<a class="shortcut" href="https://quizlet.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><img src="https://www.google.com/s2/favicons?domain=quizlet.com&amp;sz=64" alt="" width="26" height="26"></span><span class="txt"><b>Quizlet</b><small>quizlet.com</small></span></a>
 </div>
+</section>
+<section id="study-tools" aria-label="Study tools">
+<div class="section-head"><h2>Study tools</h2><span>Ready when you are</span></div>
+<p class="lead">Open a tool above to get started with your assignments, practice, and projects.</p>
+</section>
 </main>
-<footer>Assignment Shortcuts &middot; Student Portal</footer>
+</div>
+<footer>Assignment Shortcuts · Learning Hub</footer>
 <script>
 (function () {
   var TITLE = "About:NotBlank Virtual Machine"; // loading pages and the sites you open
@@ -862,17 +899,26 @@ footer{border-top:1px solid #dadce0;background:#fff;padding:.9rem 1.25rem;color:
     lockTitle(w);
   }
 
-  // Google Classroom's chalkboard icon, drawn inline so it always renders.
-  var CLASSROOM_ICON = "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Crect%20x%3D%222%22%20y%3D%224%22%20width%3D%2244%22%20height%3D%2240%22%20rx%3D%224%22%20fill%3D%22%230F9D58%22%2F%3E%3Crect%20x%3D%226.5%22%20y%3D%228%22%20width%3D%2235%22%20height%3D%2232%22%20rx%3D%221.5%22%20fill%3D%22%230B6B3F%22%2F%3E%3Crect%20x%3D%226.5%22%20y%3D%228%22%20width%3D%2235%22%20height%3D%2232%22%20rx%3D%221.5%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%222%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2218.5%22%20r%3D%224.2%22%20fill%3D%22%23FFFFFF%22%2F%3E%3Cpath%20d%3D%22M15.8%2033.5c0-4.6%203.7-8.3%208.2-8.3s8.2%203.7%208.2%208.3z%22%20fill%3D%22%23FFFFFF%22%2F%3E%3C%2Fsvg%3E";
+  // Google Classroom icon source shared by the launcher and Admin presets.
+  var CLASSROOM_ICON = "https://th.bing.com/th/id/ODF.clCBNhLM1Dz6um2Q2mQpUQ?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2";
   // Tab titles and icons for the quick-pick buttons in the admin panel.
   var PRESETS = [
     { name: "Edpuzzle", title: "Edpuzzle", domain: "edpuzzle.com" },
     { name: "IXL", title: "IXL | Math, Language Arts, Science, Social Studies, and Spanish", domain: "ixl.com" },
-    { name: "Google Classroom", title: "Home - Classroom", domain: "classroom.google.com",
-      icon: CLASSROOM_ICON },
+    { name: "Google Classroom", title: "Home - Classroom", domain: "classroom.google.com", icon: CLASSROOM_ICON },
     { name: "Khan Academy", title: "Khan Academy", domain: "khanacademy.org" },
     { name: "Zearn", title: "Zearn", domain: "zearn.org" },
-    { name: "XtraMath", title: "XtraMath", domain: "xtramath.org" }
+    { name: "XtraMath", title: "XtraMath", domain: "xtramath.org" },
+    { name: "McGraw Hill", title: "McGraw Hill", domain: "mheducation.com" },
+    { name: "iCEV", title: "iCEV", domain: "icevonline.com" },
+    { name: "Eduphoria!", title: "Eduphoria!", domain: "eduphoria.net" },
+    { name: "Writable", title: "Writable", domain: "writable.com" },
+    { name: "Wayground", title: "Wayground", domain: "wayground.com" },
+    { name: "Code.org", title: "Code.org", domain: "code.org" },
+    { name: "Google Slides", title: "Google Slides", domain: "slides.google.com" },
+    { name: "Duolingo", title: "Duolingo", domain: "duolingo.com" },
+    { name: "Studies Weekly", title: "Studies Weekly", domain: "studiesweekly.com" },
+    { name: "Quizlet", title: "Quizlet", domain: "quizlet.com" }
   ];
   // The site's own <title>, when the browser lets this page read it.
   async function siteTitle(u) {
